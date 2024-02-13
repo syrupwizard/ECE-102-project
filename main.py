@@ -12,9 +12,7 @@ Initialize the light_states dictionary with keys representing each room (room1, 
 Initialize the alarm_status dictionary with keys "armed" and "passcode", setting the initial alarm state to False (disarmed) and the passcode to "0451".
 Define the state_file variable indicating the path to the file for saving and loading the state.
 """
-import system as sys
-
-
+import system as sys #file containing
 
 def menu():
    prompt = "Enter a command: "
@@ -22,16 +20,16 @@ def menu():
    
    while user_string != "exit":
        sys.arm_disarm(user_string)#operate alarm
-       print(sys.alarm_state)#testing
        sys.open_close(user_string)#operate doors
        
+       
+       print("States: ")
+       print(sys.alarm_state)#testing
        print(sys.door_state)
        #check door state for alarm
        
        
-       
-       
-       
+
        user_string = sys.get_line(prompt)#get input at end of loop  
 
 menu()

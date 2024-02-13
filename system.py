@@ -25,7 +25,6 @@ def arm_disarm(user_string):
     elif user_string == "disarm 0451":            
         alarm_state["alarm"] = False
         print("alarm disarmed")
-    
     return alarm_state
 
 def open_close(user_string):  
