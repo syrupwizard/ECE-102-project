@@ -34,6 +34,7 @@ def get_line(prompt):
     user_string = str(input(prompt))
     return user_string
 
+#light_state["light1"]
 
 ###LOAD
 def load_file():    

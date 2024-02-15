@@ -7,6 +7,7 @@ Created on Fri Feb  9 13:55:03 2024
 """
 
 import system as sys #file containing
+<<<<<<< HEAD
 
 sys.load_file()
 
@@ -36,6 +37,32 @@ while user_string != "exit":
 
 sys.save_file()
 
+=======
+#load from file
+def menu():
+   prompt = "Enter a command a command or type 'help': "
+   user_string = sys.get_line(prompt)
+   
+   while user_string != "exit":
+       sys.help_function(user_string)
+       ###ALARM
+       sys.arm_disarm(user_string)#operate alarm
+       sys.trigger_alarm(user_string)
+       sys.change_stuff(user_string)
+
+
+       ###DOORS
+       sys.open_close(user_string)#operate doors
+       sys.check_sensor(user_string)#check doors(sensors)
+       
+###LIGHTS
+       sys.activate_lights(user_string)#turns on and off lights      
+       sys.check_lights(user_string)#check lights
+       user_string = sys.get_line(prompt)#get input at end of loop  
+
+menu()
+#write to file
+>>>>>>> 7e147c03fecface3a916259f2fe03bfbf6547b0f
 
 
     
