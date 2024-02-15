@@ -13,27 +13,30 @@ Initialize the alarm_status dictionary with keys "armed" and "passcode", setting
 Define the state_file variable indicating the path to the file for saving and loading the state.
 """
 import system as sys #file containing
-
+#load from file
 def menu():
-   prompt = "Enter a command: "
+   prompt = "Enter a command a command or type 'help': "
    user_string = sys.get_line(prompt)
    
    while user_string != "exit":
+       sys.help_function(user_string)
+       ###ALARM
        sys.arm_disarm(user_string)#operate alarm
-       sys.open_close(user_string)#operate doors
-       
-       
-       print("States: ")
-       print(sys.alarm_state)#testing
-       print(sys.door_state)
-       #check door state for alarm
-       
-       
+       sys.trigger_alarm(user_string)
+       sys.change_stuff(user_string)
 
+
+       ###DOORS
+       sys.open_close(user_string)#operate doors
+       sys.check_sensor(user_string)#check doors(sensors)
+       
+###LIGHTS
+       sys.activate_lights(user_string)#turns on and off lights      
+       sys.check_lights(user_string)#check lights
        user_string = sys.get_line(prompt)#get input at end of loop  
 
 menu()
-
+#write to file
 
 
     
