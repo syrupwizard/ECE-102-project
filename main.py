@@ -7,7 +7,6 @@ Created on Fri Feb  9 13:55:03 2024
 """
 
 import system as sys #file containing
-<<<<<<< HEAD
 
 sys.load_file()
 
@@ -37,9 +36,7 @@ while user_string != "exit":
 
 sys.save_file()
 
-=======
-#load from file
-def menu():
+"""def menu():
    prompt = "Enter a command a command or type 'help': "
    user_string = sys.get_line(prompt)
    
@@ -61,9 +58,7 @@ def menu():
        user_string = sys.get_line(prompt)#get input at end of loop  
 
 menu()
-#write to file
->>>>>>> 7e147c03fecface3a916259f2fe03bfbf6547b0f
-
+"""
 
     
 

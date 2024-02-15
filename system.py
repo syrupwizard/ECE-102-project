@@ -38,17 +38,14 @@ def get_line(prompt):
 
 ###LOAD
 def load_file():    
-    # Load door state
     if os.path.exists(DOOR_STATE_FILE):
         with open(DOOR_STATE_FILE, 'r') as file:
             door_state = json.load(file)
     
-    # Load light state
     if os.path.exists(LIGHT_STATE_FILE):
         with open(LIGHT_STATE_FILE, 'r') as file:
             light_state = json.load(file)
     
-    # Load alarm state
     if os.path.exists(ALARM_STATE_FILE):
         with open(ALARM_STATE_FILE, 'r') as file:
             alarm_state = json.load(file)

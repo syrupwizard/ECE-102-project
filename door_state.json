@@ -1,6 +1,6 @@
 {
-    "door1": true,
-    "door2": false,
-    "door3": false,
-    "door4": false
+    "door1": false,
+    "door2": true,
+    "door3": true,
+    "door4": true
 }
