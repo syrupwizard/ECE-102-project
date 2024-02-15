@@ -23,8 +23,8 @@ def help_function(user_string):
     if user_string == "help":
         print("Instructions: \n"
               "To open/close door type 'open door#' or 'close door#' for example 'open door1' will open door 1\n\n"
-              "To check if sensors are on type 'check sensors' (sensors are based on door state and are manipulated by opening and closing door\n\n"
-              "To turn light on type 'turn on light#', to turn off type 'turn off light#'. For example typing 'turn on light3 will turn on light 3\n\n"
+              "To check if doors are open type 'check doors' (door state is an abstraction of sensors state) \n\n"
+                  "To turn light on type 'turn on light#', to turn off type 'turn off light#'. For example typing 'turn on light3 will turn on light 3\n\n"
               "To check lights type 'check lights'\n"
               "To arm alarm type 'arm ****', to disarm alarm type 'disarm ****' \n\n"
               "To change passcode type 'change passcode + pass#'. \nFor example if passcode is 0000 type 'change passcode 0000'. Then type in new passcode.\n\n"
@@ -103,6 +103,8 @@ def change_stuff(user_string):
         print("alarm passcode has been changed")
     return alarm_state
 
+
+
 ###DOORS
 def open_close(user_string):  
     for key in door_state:
@@ -116,28 +118,29 @@ def open_close(user_string):
             door_state[key] = False
             print(f"{key} has been closed.")
 
-def check_sensor(user_string):
-    if user_string == "check sensors":
+def check_doors(user_string):
+    if user_string == "check doors":
         if door_state["door1"] == True:
-            print("Sensor 1 is on")
+            print("door 1 is open")
         else:
-            print("Sensor 1 is off")
+            print("door 1 is closed")
 
         if door_state["door2"] == True:
-            print("Sensor 2 is on")
+            print("door 2 is open")
         else:
-             print("Sensor 2 is off")
+             print("door 2 is closed")
 
         if door_state["door3"] == True:
-            print("Sensor 3 is on")
+            print("door 3 is open")
         else:
-            print("Sensor 3 is off")
+            print("door 3 is closed")
 
         if door_state["door4"] == True:
-            print("Sensor 4 is on")
+            print("door 4 is open")
         else:
-            print("Sensor 4 is off")
+            print("door 4 is closed")
         
+
 ###LIGHTS
 def activate_lights(user_string):
     for key in light_state:
