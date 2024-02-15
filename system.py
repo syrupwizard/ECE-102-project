@@ -3,31 +3,71 @@
 """
 Created on Fri Feb  9 14:31:38 2024
 
-@author: austin
+@author: Austin, Cece, and Chris
 """
-###Define dictionaries to hold individual compnents and their state
+import json
+import os
+###Define dictionaries to hold individual components and their state
 door_state = {"door1": False, "door2": False, "door3": False, "door4": False} #true->open false->closed
 
 light_state = {"light1": False, "light2": False, "light3": False, "light4": False}
 
 alarm_state = {"alarm": False, "passcode": "0451"} #true -> armed
+###File names of dictionaries
+DOOR_STATE_FILE = "door_state.json"
+LIGHT_STATE_FILE = "light_state.json"
+ALARM_STATE_FILE = "alarm_state.json"
 
 ###HELP
 def help_function(user_string):
     if user_string == "help":
-        print("Instructions: To open/close door type 'open door#' or 'close door#' for example 'open door1' will open door 1\n"
-              "To check if sensors are on type 'check sensor'\n"
-              "To turn light on type 'turn on light#', to turn off type 'turn off light#'. For example typing 'turn on light3 will turn on light 3\n"
+        print("Instructions: \n"
+              "To open/close door type 'open door#' or 'close door#' for example 'open door1' will open door 1\n\n"
+              "To check if sensors are on type 'check sensors' (sensors are based on door state and are manipulated by opening and closing door\n\n"
+              "To turn light on type 'turn on light#', to turn off type 'turn off light#'. For example typing 'turn on light3 will turn on light 3\n\n"
               "To check lights type 'check lights'\n"
-              "To arm alarm type 'arm ****', to disarm alarm type 'disarm ****' \n"
-              "To turn off type 'exit'"
-              "To change passcode type 'change passcode + pass#'. For example if passcode is 0000 type 'change passcode 0000'. Then type in new passcode.")
-
+              "To arm alarm type 'arm ****', to disarm alarm type 'disarm ****' \n\n"
+              "To change passcode type 'change passcode + pass#'. \nFor example if passcode is 0000 type 'change passcode 0000'. Then type in new passcode.\n\n"
+                "To exit program type 'exit'\n\n")
+###INPUT
 def get_line(prompt):
     user_string = str(input(prompt))
     return user_string
 
-#light_state["light1"]
+
+###LOAD
+def load_file():    
+    # Load door state
+    if os.path.exists(DOOR_STATE_FILE):
+        with open(DOOR_STATE_FILE, 'r') as file:
+            door_state = json.load(file)
+    
+    # Load light state
+    if os.path.exists(LIGHT_STATE_FILE):
+        with open(LIGHT_STATE_FILE, 'r') as file:
+            light_state = json.load(file)
+    
+    # Load alarm state
+    if os.path.exists(ALARM_STATE_FILE):
+        with open(ALARM_STATE_FILE, 'r') as file:
+            alarm_state = json.load(file)
+    
+    print("Data loaded successfully.")
+
+def save_file():
+    # Save door state
+    with open(DOOR_STATE_FILE, 'w') as file:
+        json.dump(door_state, file, indent=4)
+    
+    # Save light state
+    with open(LIGHT_STATE_FILE, 'w') as file:
+        json.dump(light_state, file, indent=4)
+    
+    # Save alarm state
+    with open(ALARM_STATE_FILE, 'w') as file:
+        json.dump(alarm_state, file, indent=4)
+    
+    print("Data saved successfully.")
 
 
 ###ALARM
@@ -47,14 +87,11 @@ def trigger_alarm(user_string):
     if (door_state["door1"] or door_state["door2"] or door_state["door3"]
         or door_state["door4"]) == True and alarm_state["alarm"] == True:
         
-        print("ALARM")
-        while user_string != "0451":
-            print("ALARM is sounding! ")
-            print("A red light is flashing above the door ")
+        print("...An alarm is suddenly triggered. What will you do?!")
+        while user_string != alarm_state['passcode']:
             print("WEE WOO WEE WOO")
-            print("ALARM!")
-            print("WEE WOO\n" 
-                  "WEE WOO\n")
+            print("A red light is flashing above the door.")
+            print("WEE WOO WEE WOO")
             
             user_string = get_line("Enter alarm code: ")
         print("alarm disarmed")
@@ -82,7 +119,7 @@ def open_close(user_string):
             print(f"{key} has been closed.")
 
 def check_sensor(user_string):
-    if user_string == "check sensor":
+    if user_string == "check sensors":
         if door_state["door1"] == True:
             print("Sensor 1 is on")
         else:
@@ -108,11 +145,11 @@ def activate_lights(user_string):
     for key in light_state:
         if "turn on" in user_string and key in user_string:
             light_state[key] = True
-            print(f"{key} light is on.")
+            print(f"{key} is on.")
             
         elif "turn off" in user_string and key in user_string:
             light_state[key] = False
-            print(f"{key} light is off.")            
+            print(f"{key} is off.")            
 
 def check_lights(user_string):
     if user_string == "check lights":
@@ -132,23 +169,4 @@ def check_lights(user_string):
             print("light 1 is on")
         else: 
             print("light 4 is off")        
-
-
-
-        
-        """
-        #CECE
-□ help command prints instructions for terminal
-X exit command closes python script cleanly
-X Able to check state of sensors
-
-□ Able to trigger individual sensors
-□ Triggering sensor activates alarm (only when armed)
-□ Able to check state of lights
-□ Able to turn lights off/on
-□ Able to check if alarm is armed
-□ Able to arm alarm with the passcode 0451
-        
-        
-        """
 

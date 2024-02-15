@@ -3,40 +3,39 @@
 """
 Created on Fri Feb  9 13:55:03 2024
 
-@author: austin
+@author: Austin, Cece, and Chris
 """
 
-"""Initialization:
-Initialize the sensor_states dictionary with keys representing each intrusion sensor (door1, door2, door3, door4) and set their initial state to False (not triggered).
-Initialize the light_states dictionary with keys representing each room (room1, room2, room3, room4) and set their initial state to False (lights off).
-Initialize the alarm_status dictionary with keys "armed" and "passcode", setting the initial alarm state to False (disarmed) and the passcode to "0451".
-Define the state_file variable indicating the path to the file for saving and loading the state.
-"""
 import system as sys #file containing
-#load from file
-def menu():
-   prompt = "Enter a command a command or type 'help': "
-   user_string = sys.get_line(prompt)
-   
-   while user_string != "exit":
-       sys.help_function(user_string)
-       ###ALARM
-       sys.arm_disarm(user_string)#operate alarm
-       sys.trigger_alarm(user_string)
-       sys.change_stuff(user_string)
+
+sys.load_file()
+
+prompt = "Enter a command a command or type 'help': "
+user_string = sys.get_line(prompt)
+
+while user_string != "exit":
+    ###HELP
+    sys.help_function(user_string)#prints out help info for user
+    
+    ###ALARM
+    sys.arm_disarm(user_string)#operate alarm
+    sys.alarm_state = sys.change_stuff(user_string)
+    sys.trigger_alarm(user_string)#alarm goes off until user 
+
+    ###DOORS
+    sys.open_close(user_string)#operate doors
+    sys.check_sensor(user_string)#check doors(sensors)
+    sys.trigger_alarm(user_string)#alarm goes off until user 
+
+    ###LIGHTS
+    sys.activate_lights(user_string)#turns on and off lights      
+    sys.check_lights(user_string)#check lights
+    user_string = sys.get_line(prompt)#get input at end of loop  
+    sys.trigger_alarm(user_string)#alarm goes off until user 
 
 
-       ###DOORS
-       sys.open_close(user_string)#operate doors
-       sys.check_sensor(user_string)#check doors(sensors)
-       
-###LIGHTS
-       sys.activate_lights(user_string)#turns on and off lights      
-       sys.check_lights(user_string)#check lights
-       user_string = sys.get_line(prompt)#get input at end of loop  
+sys.save_file()
 
-menu()
-#write to file
 
 
     
